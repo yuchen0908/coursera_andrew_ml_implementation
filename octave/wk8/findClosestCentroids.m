@@ -22,7 +22,11 @@ idx = zeros(size(X,1), 1);
 %
 
 
-
+for i=1:size(X,1),
+    temp_dist_matrix = (X(i,:) - centroids) * (X(i,:) - centroids)';
+    temp_dist_vector = sum(temp_dist_matrix .*  eye(K));
+    [v, idx(i)] = min(temp_dist_vector);
+end;
 
 
 

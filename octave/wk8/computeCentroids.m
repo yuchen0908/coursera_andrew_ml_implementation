@@ -26,7 +26,10 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
+for i = 1:K,
+    temp_X = X(find(idx == i), :);
+    centroids(i,:) = 1 / size(temp_X,1) * sum(temp_X,1);
+end;
 
 
 
