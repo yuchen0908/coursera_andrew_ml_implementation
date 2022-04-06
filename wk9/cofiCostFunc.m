@@ -42,6 +42,18 @@ Theta_grad = zeros(size(Theta));
 
 
 
+J = sum(sum(((X * transpose(Theta) - Y) .* R) .^2)) / 2 + lambda / 2 * trace(Theta * Theta') + lambda / 2 * trace(X * X');
+
+for i = 1:num_movies,
+    idx = find(R(i, :) == 1);
+    X_grad(i,:) = (X(i,:) * Theta(idx,:)' - Y(i, idx)) * Theta(idx,:) + lambda * X(i,:);
+end;
+
+for j = 1:num_users,
+    jdx = find(R(:, j) == 1);
+    Theta_grad(j,:) = transpose(X(jdx,:)' * (X(jdx,:) * Theta(j,:)' - Y(jdx, j))) + lambda * Theta(j,:);
+end;
+
 
 
 
